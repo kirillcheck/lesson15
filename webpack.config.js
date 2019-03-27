@@ -34,7 +34,8 @@ module.exports = {
                 },
                 useBuiltIns: "usage"
               }]
-            ]
+            ] ,
+            plugins: ["es6-promise"]
           }
         }
       }
