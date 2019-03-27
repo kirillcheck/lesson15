@@ -1599,6 +1599,10 @@ __webpack_require__(/*! core-js/modules/es6.promise */ "./node_modules/core-js/m
 
 __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
 
+__webpack_require__(/*! core-js/modules/es6.promise */ "./node_modules/core-js/modules/es6.promise.js");
+
+__webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
+
 function form() {
   //form promise  
   var message = {
@@ -1610,7 +1614,8 @@ function form() {
       input = document.getElementsByTagName('input'),
       statusMessage = document.createElement('div'),
       bottomInputForm = document.querySelector('#form'),
-      phoneInput = document.getElementsByName('phone');
+      popupInput = document.getElementsByClassName('popup-form__input')[0],
+      phoneInput = document.getElementById('phone');
   var popup = document.querySelector('.popup-form'),
       div = document.createElement("div");
   var divShowMessage = document.createElement("div");
@@ -1624,24 +1629,28 @@ function form() {
     json(bottomInputForm);
     checkJson();
   });
-
-  function checkNumber() {
-    for (var i = 0; i < input.length; i++) {
-      input[i].addEventListener('input', function (e) {
-        if (/\D/.test(e.target.value)) {
-          e.target.value = '';
-          popup.appendChild(divShowMessage);
-          divShowMessage.textContent = 'Можно вводить только цифры  ';
-        }
-
-        setTimeout(function () {
-          divShowMessage.textContent = ' ';
-        }, 2000);
-      });
+  popupInput.addEventListener('input', function (e) {
+    if (/\D/.test(e.target.value)) {
+      e.target.value = '';
+      popup.appendChild(divShowMessage);
+      divShowMessage.textContent = 'Можно вводить только цифры  ';
     }
-  }
 
-  checkNumber();
+    setTimeout(function () {
+      divShowMessage.textContent = ' ';
+    }, 2000);
+  });
+  phoneInput.addEventListener('input', function (e) {
+    if (/\D/.test(e.target.value)) {
+      e.target.value = '';
+      popup.appendChild(divShowMessage);
+      divShowMessage.textContent = 'Можно вводить только цифры  ';
+    }
+
+    setTimeout(function () {
+      divShowMessage.textContent = ' ';
+    }, 2000);
+  });
 
   function json(name) {
     event.preventDefault();
